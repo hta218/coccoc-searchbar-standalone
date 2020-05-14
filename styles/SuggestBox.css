@@ -1,0 +1,91 @@
+.box {
+  display: block;
+  position: relative;
+}
+.box .searchform {
+  display: flex;
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid #dfe1e5;
+}
+.box .searchform:hover,
+.box .openSuggest {
+  box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28);
+}
+.box .openSuggest {
+  border-radius: 22px 22px 0 0;
+}
+.boxAdjusted {
+  width: 580px;
+}
+.suggestWraper {
+  position: absolute;
+  width: 100%;
+  text-align: left;
+  margin-top: -1px;
+  z-index: 989;
+  cursor: default;
+  -webkit-user-select: none;
+}
+.suggestList {
+	display: none;
+  font-size: 16px;
+  background: #fff;
+  flex-direction: column;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  border-radius: 0 0 24px 24px;
+  box-shadow: 0 4px 4px 0 rgba(32,33,36,0.28);
+  overflow: hidden;
+  box-sizing: border-box;
+  border: 1px solid #dfe1e5;
+  border-top: 0;
+  width: 100%;
+}
+.field {
+  height: 33px;
+  border: 0;
+  border-color: #fff;
+  color: #000;
+  padding: 5px 5px 5px 20px;
+  font-size: 16px;
+  float: left;
+  flex-grow: 1;
+}
+.field:focus {
+  outline-width: 0;
+}
+.btn {
+  width: 40px;
+  height: 43px;
+  line-height: 37px;
+  border: 0;
+  background: #fff url("../public/img/iconSearch.svg") no-repeat 5px center;
+  font-size: 0;
+  text-align: center;
+  cursor: pointer;
+  display: inline-block;
+  border-radius: 2px;
+  border: none;
+  overflow: hidden;
+}
+
+.clear {
+	position: absolute;
+	right: 36px;
+	top: 0;
+	font-size: 30px;
+	display: none;
+	flex: 1;
+	color: #848687;
+	cursor: pointer;
+	font-size: 26px;
+	line-height: 26px;
+	font-family: arial,sans-serif;
+	align-items: center;
+	padding: 5px 9px;
+	border: 0;
+	background: transparent;
+}
