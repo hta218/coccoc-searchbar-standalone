@@ -31,7 +31,7 @@ const SuggestItem = props => {
 	}
 
 	function handleClick() {
-		DataCtrl.openSearchInNewtab(suggest)
+		DataCtrl.openSearchInNewtab({ query: suggest, logData: { info: "Suggest item click", query: suggest }})
 	}
 
 	return (

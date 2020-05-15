@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const WebpackBar = require('webpackbar');
 const webpack = require('webpack');
 
 module.exports = {
@@ -20,7 +21,8 @@ module.exports = {
 		}),
 		new MiniCssExtractPlugin({
 			filename: '[name].css',
-		})
+		}),
+		new WebpackBar()
 	],
 	module: {
 		rules: [
@@ -79,6 +81,8 @@ module.exports = {
 	devServer: {
 		contentBase: path.join(__dirname, './dist'),
 		port: 9000,
-		disableHostCheck: true
+		disableHostCheck: true,
+		noInfo: true,
+		stats: 'minimal'
 	}
 };

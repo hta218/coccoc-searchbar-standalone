@@ -15,13 +15,15 @@ const SearchBar = () => {
 		}
 	})
 
+	const doodleQuery = container.mainPageData.logo.query
+
 	return (
 		<div className={styles.searchBar}>
 			<div className={styles.header}>
 				<h1 className={styles.logo}>
 					<a
 						className={styles.logoLink}
-						onclick={() => DataCtrl.openSearchInNewtab('')}
+						onclick={() => DataCtrl.openSearchInNewtab({ query: doodleQuery, logData: { info: "Doodle click" } })}
 					>
 						<img src={container.mainPageData.logo.image} alt="Cốc Cốc search" />
 					</a>

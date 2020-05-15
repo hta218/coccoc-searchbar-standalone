@@ -1,4 +1,5 @@
 // import 'mdn-polyfills/Node.prototype.append.js';
+import LogCtrl from '../controllers/LogCtrl.js';
 
 class JSX {
 	constructor({ strings } = {}) {
@@ -6,7 +7,7 @@ class JSX {
 		this.component = this.component.bind(this);
 		return this.component;
 	}
-		/* eslint-disable class-methods-use-this, complexity */
+	/* eslint-disable class-methods-use-this, complexity */
 	component(tagName, attrs, ...children) {
 		if (children) {
 			children = children.filter((val) => val !== null);
@@ -17,21 +18,22 @@ class JSX {
 			// Override children
 			attrs = attrs || {};
 			Object.defineProperty(attrs, 'children', { value: children, writable: true });
+			LogCtrl.renderComponent(tagName.name)
 			return tagName(attrs);
 		}
 		if (attrs) {
 			//if (attrs?.i18n && children) {
-				//for (let i = 0; i < children.length; i++) {
-					//if (typeof children[i] === 'string') {
-						//children[i] = this.strings[children[i]] || children[i];
-					//}
-					//// eslint-disable-next-line no-undef
-				//}
-				//delete attrs.i18n;
+			//for (let i = 0; i < children.length; i++) {
+			//if (typeof children[i] === 'string') {
+			//children[i] = this.strings[children[i]] || children[i];
+			//}
+			//// eslint-disable-next-line no-undef
+			//}
+			//delete attrs.i18n;
 			//}
 			//if (attrs.i18n) {
-				//// todo - traverse children, find just String, localize them as i18n
-				//delete attrs.i18n;
+			//// todo - traverse children, find just String, localize them as i18n
+			//delete attrs.i18n;
 			//}
 			if (attrs.dataSet) {
 				for (const key of Object.keys(dataSet)) {
@@ -48,9 +50,9 @@ class JSX {
 		const elem = tagName !== 'fragment' ?
 			Object.assign(document.createElement(tagName), attrs) :
 			document.createDocumentFragment();
-			for (const child of children) {
-				if (Array.isArray(child)) { elem.append(...child); } else { elem.append(child); }
-			}
+		for (const child of children) {
+			if (Array.isArray(child)) { elem.append(...child); } else { elem.append(child); }
+		}
 
 		if (typeof tagName === 'function') {
 			if (Array.isArray(attrs.children)) {
@@ -70,7 +72,7 @@ class JSX {
 			}
 
 			if (typeof attrs?.ref === 'function') {
-					attrs.ref(elem);
+				attrs.ref(elem);
 			}
 
 			// Append style

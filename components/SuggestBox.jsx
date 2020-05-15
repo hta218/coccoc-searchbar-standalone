@@ -7,6 +7,7 @@ import { KEYS } from '../utils/index'
 import SuggestItem from './SuggestItem.jsx'
 
 function SuggestBox() {
+
 	function handleInputClick() {
 		if (container.query) {
 			container.suggestionsOpened = true
@@ -78,11 +79,11 @@ function SuggestBox() {
 					id={CocCocStrings.COCCOC_SEARCH_INPUT_ID}
 					ref={ref => refs.searchInput = ref}
 					onclick={handleInputClick}
-					oninput={throttle(DataCtrl.search, CocCocStrings.TROTTLE_TRESHOLD)}
+					oninput={throttle(DataCtrl.search, CocCocStrings.THROTTLE_THRESHOLD)}
 					onkeydown={handleKeyDown}
 				/>
 				<button
-					onclick={DataCtrl.openSearchInNewtab}
+					onclick={() => DataCtrl.openSearchInNewtab({ logData: { info: "Search button click" } })}
 					className={styles.btn}
 				>
 					tìm kiếm

@@ -1,12 +1,14 @@
 import DOMCtrl from './DOMCtrl'
+import LogCtrl from './LogCtrl'
 
 export const CocCocStrings = {
 	COCCOC_MAIN_PAGE: '/composer/main_page',
 	COCCOC_SUGGEST_URL: '/composer/autocomplete?q={{term}}&s=nt',
-	COCCOC_SEARCH_URL: '/search#query={{query}}&s=nt',
+	COCCOC_SEARCH_URL: '/search?query={{query}}&s=nt',
+	COCCOC_LOG_URL: '/log',
 	COCCOC_SEARCH_INPUT_ID: 'coccoc-searchbar-input',
 	PUBLIC_DIR: '../public',
-	TROTTLE_TRESHOLD: 200,
+	THROTTLE_THRESHOLD: 200,
 	SUGGESTIONS_COUNT: 10,
 }
 
@@ -34,12 +36,13 @@ const DataCtrl = {
 				.then(res => res.json())
 				.then(data => {
 					container.mainPageData = data || {}
-					const defLogo = { image: require(`../public/img/logo.svg`) }
+					const defLogo = { image: require(`../public/img/logo.svg`), query: "" }
 
 					// Get the right doodle
 					if (data.doodle && data.doodle[0]) {
 						const today = +new Date()
 						const logo = data.doodle.find(dod => (dod.start_date * 1000) <= today && today <= (dod.end_date * 1000))
+						logo.query = (logo.search_url || "").split("?query=")[1]
 						container.mainPageData.logo = logo || defLogo
 					} else {
 						container.mainPageData.logo = defLogo
@@ -82,10 +85,11 @@ const DataCtrl = {
 			.catch(console.error)
 	},
 
-	openSearchInNewtab(query = container.query) {
+	openSearchInNewtab({ query = container.query, logData = {} }) {
 		const qr = typeof query === 'string' ? query : container.query
 		const url = CocCocStrings.COCCOC_SEARCH_URL.replace('{{query}}', qr)
-
+		console.log(6996, query, logData)
+		LogCtrl.clickOccur({ url, type: "Click", ...logData })
 		window.open(url, "_blank")
 	}
 }
