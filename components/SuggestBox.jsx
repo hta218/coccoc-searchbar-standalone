@@ -86,7 +86,7 @@ function SuggestBox() {
 					onkeydown={handleKeyDown}
 				/>
 				<button
-					onclick={() => DataCtrl.openSearchInNewtab({ logData: { info: "Search button click" } })}
+					onclick={() => DataCtrl.openSearchInNewtab({ query: refs.searchInput.value, logData: { info: "Search button click" } })}
 					className={styles.searchBtn}
 				>
 					Tìm với Cốc Cốc
@@ -95,7 +95,7 @@ function SuggestBox() {
 			</div>
 			<div className={styles.suggestWraper}>
 				<ul
-					className={`${styles.suggestList} ${styles.suggestListStartPage}`}
+					className={styles.suggestList}
 					ref={ref => refs.suggestList = ref}
 				>
 					{initialItems}

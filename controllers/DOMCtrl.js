@@ -12,7 +12,7 @@ const DOMCtrl = {
 			if (item) {
 				if (i < suggestions.length) {
 					item.removeChild(item.firstChild)
-					item.appendChild(<SuggestItem suggest={suggestions[i]} />)
+					item.appendChild(<SuggestItem suggest={suggestions[i]} index={i} />)
 					item.style.display = "block"
 				} else {
 					item.style.display = "none"
@@ -31,16 +31,15 @@ const DOMCtrl = {
 	},
 
 	showSelected: () => {
-		const { selected, suggestions, query } = container
+		const { selected } = container
 
 		const item = refs.suggestList.children[selected]
-		let selectionLength = query.length
 
 		if (item) {
 			item.dataset.selected = true
-			selectionLength = suggestions[selected].length
 		}
 
+		const selectionLength = refs.searchInput.value.length
 		refs.searchInput.setSelectionRange(selectionLength, selectionLength)
 	},
 

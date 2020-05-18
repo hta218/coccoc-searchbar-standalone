@@ -10,6 +10,8 @@ const styles = isMobile ? mobileStyles : desktopStyles
 const SearchBar = () => {
 	document.body.addEventListener("click", e => {
 		if (e.target.getAttribute("id") !== CocCocStrings.COCCOC_SEARCH_INPUT_ID) {
+			DOMCtrl.hideSelected()
+			DataCtrl.setSelected(-1)
 			container.suggestionsOpened = false
 			DOMCtrl.toggleSuggestions()
 		}
@@ -31,7 +33,6 @@ const SearchBar = () => {
 				<div className={styles.wrapSB}>
 					<SuggestBox />
 				</div>
-
 				{(isMobile && isCocCoc) ? <Templates /> : null}
 			</div>
 		</div>

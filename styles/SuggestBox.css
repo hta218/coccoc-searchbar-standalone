@@ -1,11 +1,10 @@
 .box {
-  display: block;
   position: relative;
 }
 .box .searchform {
   display: flex;
   position: relative;
-  border-radius: 24px;
+  border-radius: 22px;
   overflow: hidden;
   border: 1px solid #dfe1e5;
 }
@@ -24,18 +23,14 @@
 .suggestWraper {
   position: absolute;
   width: 100%;
-  text-align: left;
   margin-top: -1px;
   z-index: 989;
-  cursor: default;
-  -webkit-user-select: none;
 }
 .suggestList {
 	display: none;
   font-size: 16px;
   background: #fff;
   flex-direction: column;
-  list-style-type: none;
   margin: 0;
   padding: 0;
   border-radius: 0 0 24px 24px;
@@ -44,13 +39,12 @@
   box-sizing: border-box;
   border: 1px solid #dfe1e5;
   border-top: 0;
-  width: 100%;
 }
 .field {
+	font-family: 'Encode Sans', Arial, Helvetica, sans-serif;
 	box-sizing: border-box;
   height: 42px;
   border: 0;
-  border-color: #fff;
   color: #000;
   padding: 11px 12px 11px 53px;
 	font-size: 15px;
@@ -74,9 +68,7 @@
   width: 32.5%;
 	height: 42px;
 	padding: 0px;
-	border: 0;
-	font-family: 'Encode Sans', sans-serif;
-	font-style: normal;
+	font-family: 'Encode Sans', Arial, Helvetica, sans-serif;
 	font-weight: 600;
 	font-size: 15px;
 	color: #fff;
@@ -89,18 +81,17 @@
 
 .clear {
 	position: absolute;
-	right: 36px;
+	right: 38px;
 	top: 0;
-	font-size: 30px;
 	display: none;
 	flex: 1;
 	color: #848687;
 	cursor: pointer;
 	font-size: 26px;
-	line-height: 26px;
-	font-family: arial,sans-serif;
+	line-height: 30px;
+	font-family: 'Encode Sans', Arial, Helvetica, sans-serif;
 	align-items: center;
-	padding: 5px 9px;
+	padding: 4px 10px;
 	border: 0;
 	background: transparent;
 }

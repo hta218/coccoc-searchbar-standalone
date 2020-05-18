@@ -33,10 +33,7 @@ function Templates() {
 					<ul>
 						{
 							queries.map(({ query, type }) => <li key={type}>
-								<a
-									className={styles.exampleLink}
-									onclick={() => handleClick({ query, qrType: type })}
-								>
+								<a onclick={() => handleClick({ query, qrType: type })}>
 									<span className={styles.icon}>
 										<img src={require(`../public/img/startscreen/icons/${queryType[type].icon}.svg`)} alt={query} />
 									</span>

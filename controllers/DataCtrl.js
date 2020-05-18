@@ -102,12 +102,14 @@ const DataCtrl = {
 		container.suggestions = []
 	},
 
-	setSelected: selected => {
+	setSelected: (selected, updateQr = true) => {
 		container.selected = selected
-		if (container.suggestions[selected]) {
-			refs.searchInput.value = container.suggestions[selected]
-		} else {
-			refs.searchInput.value = container.query
+		if (updateQr) {
+			if (container.suggestions[selected]) {
+				refs.searchInput.value = container.suggestions[selected]
+			} else {
+				refs.searchInput.value = container.query
+			}
 		}
 	},
 
