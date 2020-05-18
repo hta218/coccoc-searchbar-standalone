@@ -27,7 +27,6 @@ const LogCtrl = {
 
 	clickOccur: (params = {}) => {
 		const qs = toQueryString({ type: "Click", ...params, ...logDefData });
-		console.log(6969, params, qs);
 		(new Image()).src = `${CocCocStrings.COCCOC_LOG_URL}?${qs}`
 	}
 }

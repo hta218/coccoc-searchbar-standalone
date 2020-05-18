@@ -1,7 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const WebpackBar = require('webpackbar');
 const webpack = require('webpack');
 
 module.exports = {
@@ -22,7 +21,6 @@ module.exports = {
 		new MiniCssExtractPlugin({
 			filename: '[name].css',
 		}),
-		new WebpackBar()
 	],
 	module: {
 		rules: [

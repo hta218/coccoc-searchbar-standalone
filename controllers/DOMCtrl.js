@@ -1,17 +1,24 @@
 import SuggestItem from '../components/SuggestItem.jsx'
 import styles from '../styles/SuggestBox.css'
-import { container, refs } from './DataCtrl'
+import { CocCocStrings, container, refs } from './DataCtrl'
 
 const DOMCtrl = {
 	renderSuggestions: () => {
 		const { suggestList } = refs
-		container.suggestions.forEach((suggest, idx) => {
-			const item = suggestList.children[idx]
+		const { suggestions } = container
+
+		for (let i = 0; i < CocCocStrings.SUGGESTIONS_COUNT; i++) {
+			const item = suggestList.children[i]
 			if (item) {
-				item.removeChild(item.firstChild)
-				item.appendChild(<SuggestItem suggest={suggest} />)
+				if (i < suggestions.length) {
+					item.removeChild(item.firstChild)
+					item.appendChild(<SuggestItem suggest={suggestions[i]} />)
+					item.style.display = "block"
+				} else {
+					item.style.display = "none"
+				}
 			}
-		})
+		}
 	},
 
 	toggleSuggestions: () => {
@@ -23,27 +30,28 @@ const DOMCtrl = {
 		refs.suggestList.style.display = display
 	},
 
-	toggleSelected: (action) => {
+	showSelected: () => {
 		const { selected, suggestions, query } = container
 
 		const item = refs.suggestList.children[selected]
 		let selectionLength = query.length
 
 		if (item) {
-			const method = action === 'show' ? 'add' : 'remove'
-
-			item.classList[method]("selected")
-			refs.searchInput.value = suggestions[selected]
-
+			item.dataset.selected = true
 			selectionLength = suggestions[selected].length
-		} else {
-			refs.searchInput.value = query
 		}
 
-		if (action === 'show') {
-			refs.searchInput.setSelectionRange(selectionLength, selectionLength)
-		}
+		refs.searchInput.setSelectionRange(selectionLength, selectionLength)
 	},
+
+	hideSelected: () => {
+		const { selected } = container
+		const item = refs.suggestList.children[selected]
+
+		if (item) {
+			item.dataset.selected = false
+		}
+	}
 }
 
 window.__SBDOMCtrl = DOMCtrl

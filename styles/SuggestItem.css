@@ -5,11 +5,14 @@
   display: block;
   min-width: 0;
   max-height: none;
-  padding: 0;
+	padding: 2px 0;
   cursor: pointer;
 }
+.item:first-child {
+	padding-top: 0;
+}
 .item:first-child .itemInner {
-  border-top: 1px solid #dfe1e5;
+	border-top: 1px solid #dfe1e5;
 }
 .item a {
   font-weight: 700;
@@ -22,13 +25,16 @@
   font-weight: 400;
 }
 .item .itemInner {
-  margin: 0 20px;
+	margin: 0 0 0 20px;
+}
+.item .itemInner.ccBrowser {
+	margin: 0 20px;
 }
 .item:hover {
 	display: block;
 	background-color: #eee;
 }
 
-.item.selected {
+.item[data-selected=true] {
 	background-color: #eee;
 }

@@ -28,6 +28,7 @@ export const refs = {
 }
 
 export const isMobile = (window.innerWidth <= 767)
+export const isCocCoc = (/Coc Coc|coccoc/i.test(navigator.vendor) || /coc_coc_browser/i.test(navigator.userAgent))
 
 const DataCtrl = {
 	fetchExampleQueries: () => {
@@ -62,6 +63,7 @@ const DataCtrl = {
 
 	search: () => {
 		container.query = refs.searchInput.value
+
 		const fetchURL = CocCocStrings.COCCOC_SUGGEST_URL.replace('{{term}}', container.query)
 		fetch(fetchURL)
 			.then(res => res.text())
@@ -71,25 +73,52 @@ const DataCtrl = {
 					if (data.suggestions) {
 						container.suggestions = data.suggestions
 						DOMCtrl.renderSuggestions()
+						DOMCtrl.hideSelected()
+						container.selected = -1
 						container.suggestionsOpened = true
-						DOMCtrl.toggleSuggestions('show')
+						DOMCtrl.toggleSuggestions()
 						refs.clearSearch.style.display = "flex"
 					}
 				} else {
 					container.suggestions = []
 					container.suggestionsOpened = false
-					refs.clearSearch.style.display = "none"
-					DOMCtrl.toggleSuggestions('hide')
+					DOMCtrl.hideSelected()
+					container.selected = -1
+					if (container.query === "") {
+						refs.clearSearch.style.display = "none"
+					}
+					DOMCtrl.toggleSuggestions()
 				}
 			})
 			.catch(console.error)
 	},
 
-	openSearchInNewtab({ query = container.query, logData = {} }) {
+	clearSearch: () => {
+		refs.clearSearch.style.display = "none"
+		refs.searchInput.value = ""
+		container.suggestionsOpened = false
+		container.query = ''
+		container.selected = -1
+		container.suggestions = []
+	},
+
+	setSelected: selected => {
+		container.selected = selected
+		if (container.suggestions[selected]) {
+			refs.searchInput.value = container.suggestions[selected]
+		} else {
+			refs.searchInput.value = container.query
+		}
+	},
+
+	openSearchInNewtab({ query = container.query, logData }) {
 		const qr = typeof query === 'string' ? query : container.query
 		const url = CocCocStrings.COCCOC_SEARCH_URL.replace('{{query}}', qr)
-		console.log(6996, query, logData)
-		LogCtrl.clickOccur({ url, type: "Click", ...logData })
+
+		if (logData) {
+			LogCtrl.clickOccur({ url, type: "Click", ...logData })
+		}
+
 		window.open(url, "_blank")
 	}
 }
@@ -97,6 +126,7 @@ const DataCtrl = {
 window.__SBdata = {
 	container,
 	refs,
-	isMobile
+	isMobile,
+	isCocCoc
 }
 export default DataCtrl

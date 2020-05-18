@@ -1,5 +1,5 @@
 import escapeRegExp from 'lodash/escapeRegExp';
-import DataCtrl, { container } from '../controllers/DataCtrl';
+import DataCtrl, { container, isCocCoc } from '../controllers/DataCtrl';
 import styles from '../styles/SuggestItem.css';
 
 const SuggestItem = props => {
@@ -36,7 +36,7 @@ const SuggestItem = props => {
 
 	return (
 		<div
-			className={styles.itemInner}
+			className={`${styles.itemInner} ${isCocCoc ? styles.ccBrowser : ""}`}
 			onclick={handleClick}
 		>
 			{url}

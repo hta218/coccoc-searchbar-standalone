@@ -1,5 +1,5 @@
 import throttle from 'lodash/throttle'
-import DataCtrl, { CocCocStrings, container, isMobile, refs } from '../controllers/DataCtrl'
+import DataCtrl, { CocCocStrings, container, isMobile, refs, isCocCoc } from '../controllers/DataCtrl'
 import DOMCtrl from '../controllers/DOMCtrl'
 import styles from '../styles/SuggestBox.css'
 import itemStyles from '../styles/SuggestItem.css'
@@ -16,51 +16,51 @@ function SuggestBox() {
 	}
 
 	function clearSearch() {
-		refs.clearSearch.style.display = "none"
-		refs.searchInput.value = ""
-		DOMCtrl.toggleSuggestions()
 		container.suggestionsOpened = false
-		container.query = ''
-		container.suggestions = []
+		DOMCtrl.toggleSuggestions()
+		DataCtrl.clearSearch()
 	}
 
 	function handleKeyDown(e) {
-		let { selected, suggestionsOpened: isOpen } = container
+		let { selected, suggestionsOpened: isOpen, suggestions, query } = container
 
 		if (e.keyCode === KEYS.UP) {
 			if (!isOpen) { return }
 			// Prevent input tag from automatic moving cursor to the start position
 			e.preventDefault()
-			DOMCtrl.toggleSelected("hide")
+			DOMCtrl.hideSelected()
+
 			selected -= 1
 			if (selected < -1) {
 				selected = CocCocStrings.SUGGESTIONS_COUNT - 1
 			}
-			container.selected = selected
-			DOMCtrl.toggleSelected("show")
+
+			DataCtrl.setSelected(selected)
+			DOMCtrl.showSelected()
 		} else if (e.keyCode === KEYS.DOWN) {
 			if (!isOpen) { return }
-			DOMCtrl.toggleSelected("hide")
+			DOMCtrl.hideSelected()
+
 			selected += 1
 			if (selected > CocCocStrings.SUGGESTIONS_COUNT - 1) {
 				selected = -1
 			}
-			container.selected = selected
-			DOMCtrl.toggleSelected("show")
+
+			DataCtrl.setSelected(selected)
+			DOMCtrl.showSelected()
 		} else if (e.keyCode === KEYS.RIGHT) {
 			if (!isOpen) { return }
 			if (selected === -1) {
-				container.selected = 0
-				DOMCtrl.toggleSelected('show')
+				DataCtrl.setSelected(0)
+				DOMCtrl.showSelected()
 			}
 		} else if (e.keyCode === KEYS.ESC) {
 			container.suggestionsOpened = false
 			DOMCtrl.toggleSuggestions()
-			container.selected = -1
-			container.suggestionsOpened = false
-			refs.searchInput.value = container.query
+			DOMCtrl.hideSelected()
+			DataCtrl.setSelected(-1)
 		} else if (e.keyCode === KEYS.ENTER) {
-			DataCtrl.openSearchInNewtab(container.suggestions[selected])
+			DataCtrl.openSearchInNewtab({ query: suggestions[selected] })
 		}
 	}
 
@@ -69,12 +69,15 @@ function SuggestBox() {
 		.map(item => <a className={itemStyles.item}><SuggestItem {...item} /></a>)
 
 	const clearBtn = <span ref={ref => refs.clearSearch = ref} className={styles.clear} onclick={clearSearch}>×</span>
+	const searchIcon = <span className={styles.searchIcon} />
 
 	return (
-		<div className={styles.box} >
+		<div className={`${styles.box} ${isCocCoc ? styles.ccBrowser : ""}`}>
 			<div className={styles.searchform} ref={ref => refs.searchForm = ref}>
+				{ (!isMobile && !isCocCoc) ? searchIcon : null }
 				<input
 					type="text"
+					placeholder="Từ khóa tìm kiếm"
 					className={styles.field}
 					id={CocCocStrings.COCCOC_SEARCH_INPUT_ID}
 					ref={ref => refs.searchInput = ref}
@@ -84,9 +87,9 @@ function SuggestBox() {
 				/>
 				<button
 					onclick={() => DataCtrl.openSearchInNewtab({ logData: { info: "Search button click" } })}
-					className={styles.btn}
+					className={styles.searchBtn}
 				>
-					tìm kiếm
+					Tìm với Cốc Cốc
 				</button>
 				{isMobile ? clearBtn : null}
 			</div>

@@ -22,7 +22,6 @@ function Templates() {
 	const { queries = [], qaBox } = container.mainPageData
 
 	function handleClick({ query, qrType }) {
-		console.log(6969, query, qrType)
 		DataCtrl.openSearchInNewtab({ query, logData: { info: "Example query click", qrType } })
 	}
 

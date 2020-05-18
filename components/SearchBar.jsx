@@ -1,4 +1,4 @@
-import DataCtrl, { CocCocStrings, container, isMobile } from '../controllers/DataCtrl.js';
+import DataCtrl, { CocCocStrings, container, isMobile, isCocCoc } from '../controllers/DataCtrl.js';
 import DOMCtrl from '../controllers/DOMCtrl';
 import mobileStyles from '../styles/Mobile.SearchBar.css';
 import desktopStyles from '../styles/SearchBar.css';
@@ -18,7 +18,7 @@ const SearchBar = () => {
 	const doodleQuery = container.mainPageData.logo.query
 
 	return (
-		<div className={styles.searchBar}>
+		<div className={`${styles.searchBar} ${styles.startScreen}`}>
 			<div className={styles.header}>
 				<h1 className={styles.logo}>
 					<a
@@ -32,7 +32,7 @@ const SearchBar = () => {
 					<SuggestBox />
 				</div>
 
-				{isMobile ? <Templates /> : null}
+				{(isMobile && isCocCoc) ? <Templates /> : null}
 			</div>
 		</div>
 	)
