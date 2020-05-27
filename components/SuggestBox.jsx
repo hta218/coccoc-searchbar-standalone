@@ -22,7 +22,7 @@ function SuggestBox() {
 	}
 
 	function handleKeyDown(e) {
-		let { selected, suggestionsOpened: isOpen, suggestions, query } = container
+		let { selected, suggestionsOpened: isOpen, suggestions } = container
 
 		if (e.keyCode === KEYS.UP) {
 			if (!isOpen) { return }

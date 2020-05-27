@@ -10,10 +10,10 @@
 .searchBar button {
 	font-size: 0;
 	height: 38px;
-	width: 23px;
+	width: 24px;
 	margin-right: 18px;
 	padding: 0;
-	background: url("../public/img/iconCocCocSearch.svg") no-repeat center;
+	background: url("~root/public/img/iconCocCocSearch.svg") no-repeat center;
 }
 .searchBar input {
 	width: 100%;
@@ -70,7 +70,7 @@
 }
 .qaBox:before {
   content: "";
-  background: url("../public/img/startscreen/icons/iconQA.svg") no-repeat center center;
+  background: url("~root/public/img/startscreen/icons/iconQA.svg") no-repeat center center;
   width: 48px;
   height: 48px;
   display: block;

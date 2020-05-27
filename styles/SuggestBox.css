@@ -55,7 +55,7 @@
   outline: none;
 }
 .searchIcon {
-	background: #fff url("../public/img/iconCocCocSearch.svg") no-repeat center;
+	background: #fff url("~root/public/img/iconCocCocSearch.svg") no-repeat center;
 	position: absolute;
 	top: 0;
 	left: 0px;
@@ -103,8 +103,14 @@
 }
 
 .box.ccBrowser .searchBtn {
-	background: #fff url("../public/img/iconCocCocSearch.svg") no-repeat center;
+	background: #fff url("~root/public/img/iconCocCocSearch.svg") no-repeat center;
 	font-size: 0;
 	width: 24px;
 	margin-right: 23px;
+}
+
+@media screen and (max-width: 767px) {
+	.box.ccBrowser .searchBtn {
+		margin-right: 18px;
+	}
 }

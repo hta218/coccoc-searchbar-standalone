@@ -7,7 +7,6 @@ export const CocCocStrings = {
 	COCCOC_SEARCH_URL: '/search?query={{query}}&s=nt',
 	COCCOC_LOG_URL: '/log',
 	COCCOC_SEARCH_INPUT_ID: 'coccoc-searchbar-input',
-	PUBLIC_DIR: '../public',
 	THROTTLE_THRESHOLD: 200,
 	SUGGESTIONS_COUNT: 10,
 }
@@ -37,7 +36,7 @@ const DataCtrl = {
 				.then(res => res.json())
 				.then(data => {
 					container.mainPageData = data || {}
-					const defLogo = { image: require(`../public/img/logo.svg`), query: "" }
+					const defLogo = { image: require(`root/public/img/logo.svg`), query: "" }
 
 					// Get the right doodle
 					if (data.doodle && data.doodle[0]) {

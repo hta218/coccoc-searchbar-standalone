@@ -9,6 +9,12 @@ module.exports = {
 		filename: 'main.js',
 		path: path.resolve(__dirname, 'dist'),
 	},
+	resolve: {
+		extensions: ['.js', '.jsx', '.css'],
+		alias: {
+			'root': path.resolve(__dirname)
+		}
+	},
 	plugins: [
 		new HtmlWebpackPlugin({
 			title: 'Searchbar Stand-alone',
@@ -44,6 +50,7 @@ module.exports = {
 						loader: 'css-loader',
 						options: {
 							sourceMap: true,
+							// url: false,
 							modules: {
 								// auto: true,
 								localIdentName: '[name]---[local]---[hash:base64:5]'

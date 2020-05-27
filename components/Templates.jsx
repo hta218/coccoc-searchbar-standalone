@@ -35,7 +35,7 @@ function Templates() {
 							queries.map(({ query, type }) => <li key={type}>
 								<a onclick={() => handleClick({ query, qrType: type })}>
 									<span className={styles.icon}>
-										<img src={require(`../public/img/startscreen/icons/${queryType[type].icon}.svg`)} alt={query} />
+										<img src={require(`root/public/img/startscreen/icons/${queryType[type].icon}.svg`)} alt={query} />
 									</span>
 									<span className={styles.name}>{queryType[type].text}</span>
 								</a>
