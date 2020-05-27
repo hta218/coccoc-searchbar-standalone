@@ -42,7 +42,9 @@ const DataCtrl = {
 					if (data.doodle && data.doodle[0]) {
 						const today = +new Date()
 						const logo = data.doodle.find(dod => (dod.start_date * 1000) <= today && today <= (dod.end_date * 1000))
-						logo.query = (logo.search_url || "").split("?query=")[1]
+						if (logo && logo.search_url) {
+							logo.query = (logo.search_url || "").split("?query=")[1]
+						}
 						container.mainPageData.logo = logo || defLogo
 					} else {
 						container.mainPageData.logo = defLogo
